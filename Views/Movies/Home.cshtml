@@ -1,0 +1,31 @@
+﻿@model MvcMovie.Models.MovieGenreViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to the Movie App!</h1>
+
+
+<form asp-controller="Movies" asp-action="Home" method="get">
+
+</form>
+
+
+<div class="card-columns">
+    @foreach (var item in Model.Movies)
+    {
+    
+    <div class="card">
+        <div class="card-img" style ="background-image: url('https://m.media-amazon.com/images/M/MV5BMmZiMjdlN2UtYzdiZS00YjgxLTgyZGMtYzE4ZGU5NTlkNjhhXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg');"></div>
+            <div class="card-body">
+                
+                <h5 class>
+                 @Html.DisplayFor(modelItem => item.Title)
+                </h5>
+                <p>@Html.DisplayFor(modelItem => item.Price)</p>
+             
+            </div>
+    </div>
+    }
+</div>
