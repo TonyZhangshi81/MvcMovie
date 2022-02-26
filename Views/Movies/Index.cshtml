@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Movies[0].Title)
             </th>
-            <th> 
+            <th>
                 @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
             </th>
             <th>
@@ -55,7 +55,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
-                   <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Rating)
                 </td>
                 <td>
@@ -67,3 +67,12 @@
         }
     </tbody>
 </table>
+
+@await Component.InvokeAsync("CitySummary", new { counts = Model.Movies.Count(), movies = Model.Movies })
+
+<form asp-action="Change">
+    @await Component.InvokeAsync("InputArea", new { model = Model })
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

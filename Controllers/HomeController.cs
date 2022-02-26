@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcMovie.Data;
 using MvcMovie.Models;
 using System.Diagnostics;
 
@@ -7,10 +8,13 @@ namespace MvcMovie.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MvcMovieContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, MvcMovieContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -27,6 +31,15 @@ namespace MvcMovie.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult UpdateComponent()
+        {
+            return ViewComponent("CitySummary", new { counts = 10, movies = _context.Movie.ToList() });
         }
     }
 }

@@ -42,7 +42,9 @@ namespace MvcMovie.Controllers
             var movieGenreVM = new MovieGenreViewModel
             {
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Movies = await movies.ToListAsync()
+                Movies = await movies.ToListAsync(),
+
+                Movie = movies.First()
             };
 
             return View(movieGenreVM);
@@ -199,6 +201,17 @@ namespace MvcMovie.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movie.Any(e => e.Id == id);
+        }
+
+
+
+        // POST: Movies/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public IActionResult Change(MovieGenreViewModel viewModel)
+        {
+            return this.View(viewModel);
         }
     }
 }
