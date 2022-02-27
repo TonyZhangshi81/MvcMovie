@@ -19,19 +19,17 @@ namespace MvcMovie.ViewComponents
             _context = context;
         }
 
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="counts"></param>
-        /// <param name="movies"></param>
+        /// <param name="price"></param>
         /// <returns></returns>
-        public IViewComponentResult Invoke(int? counts, List<Movie> movies)
+        public IViewComponentResult Invoke(decimal? price)
         {
             return View(new CitySummaryViewModel()
             {
-                Counts = counts ?? _context.Movie.Count(),
-                Price = movies.Sum(d => d.Price)
+                Counts = _context.Movie.Count(),
+                Price = price ?? _context.Movie.Sum(d => d.Price)
             });
         }
     }

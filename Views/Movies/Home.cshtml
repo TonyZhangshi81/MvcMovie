@@ -13,8 +13,8 @@
 <script>
     $(function () {
            $('#updateComponent').on("click", function(){
-
-              $("#divCitySummary").load('/Home/UpdateComponent');
+               alert($('#price').val());
+              $("#divCitySummary").load('/Home/UpdateComponent?price=' + $('#price').val());
             });
         });
 </script>

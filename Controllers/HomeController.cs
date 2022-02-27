@@ -36,10 +36,11 @@ namespace MvcMovie.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="price"></param>
         /// <returns></returns>
-        public IActionResult UpdateComponent()
+        public IActionResult UpdateComponent(decimal price)
         {
-            return ViewComponent("CitySummary", new { counts = 10, movies = _context.Movie.ToList() });
+            return ViewComponent("CitySummary", new { price });
         }
     }
 }
