@@ -1,0 +1,56 @@
+﻿@model MvcMovie.Models.ExampleViewModel
+
+@{
+    ViewData["Title"] = "Example(DropDownList Linkage)";
+}
+
+<script>
+    $(function () {
+        $("#Genre").change(function () {
+            $.get("GetTitleList", { Genre: $("#Genre").val() },
+                function (data) {
+                    $("#Title").empty();
+                    $.each(data, function (index, row) {
+                        $("#Title").append("<option value='" + row.value + "'>" + row.text + "</option>");
+                    });
+                });
+            });
+        });
+</script>
+
+<br />
+<br />
+<br />
+<h1>Example(DropDownList Linkage)</h1>
+
+<form asp-controller="Example" asp-action="Index" method="get">
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="col-md-2">
+                @Html.DisplayNameFor(_ => _.GenresItems)
+            </div>
+            <div class="col-md-3">
+                @Html.DropDownListFor(_ => _.Genre, Model.GenresItems, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="col-md-2">
+                @Html.DisplayNameFor(_ => _.TitleItems)
+            </div>
+            <div class="col-md-3">
+                @Html.DropDownListFor(_ => _.Title, Model.TitleItems, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-1">
+                <input type="submit" value="Filter" />
+            </div>
+        </div>
+    </div>
+
+    @Html.DisplayFor(_ => _.GenreTitle)
+
+
+</form>
